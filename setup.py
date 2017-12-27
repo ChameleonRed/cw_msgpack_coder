@@ -7,14 +7,14 @@ setup(name='cw_msgpack_coder',
       author_email='Cezary.Wagner@gmail.com',
       url='https://github.com/ChameleonRed/cw_msgpack_coder',
       license='MIT',
-      packages=('cw_msgpack_coder',),
+      packages=['cw_msgpack_coder'],
       install_requires='u-msgpack-python',
-      classifiers=(
+      classifiers=[
           'Development Status :: 5 - Production/Stable',
           'License :: OSI Approved :: MIT License',
           'Programming Language :: Python :: 3.6',
           'Topic :: Software Development',
           'Topic :: Software Development :: Libraries',
-          'Topic :: Software Development :: Libraries :: Python Modules'),
+          'Topic :: Software Development :: Libraries :: Python Modules'],
       keywords="msgpack serialization streaming object encoding decoding",
       test_suite="tests.test_umsgpack_coder")

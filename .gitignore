@@ -1,0 +1,4 @@
+.idea/
+build/
+dist/
+cw_msgpack_coder.egg-info/

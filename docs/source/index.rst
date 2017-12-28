@@ -10,6 +10,8 @@ Welcome to cw_msgpack_coder's documentation!
    :maxdepth: 2
    :caption: Contents:
 
+   umsgpack_coder
+
 
 
 Indices and tables

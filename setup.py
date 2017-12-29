@@ -1,8 +1,17 @@
+import os
 from setuptools import setup
 
+
+def long_description():
+    path = os.path.join(os.path.dirname(__file__), 'README.rst')
+    with open(path) as f:
+        return f.read()
+
+
 setup(name='cw_msgpack_coder',
-      version='1.1',
+      version='1.1.1',
       description='Simple and fast Python any object serialization with use msgpack.',
+      long_description=long_description(),
       author='Cezary K. Wagner',
       author_email='Cezary.Wagner@gmail.com',
       url='https://github.com/ChameleonRed/cw_msgpack_coder',

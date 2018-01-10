@@ -149,7 +149,7 @@ class UmsgpackCoder:
 
     def dump(self, obj, f):
         """ Dump object to file stream. """
-        umsgpack.pack(obj, f, ext_handlers=self._ext_dump())
+        return umsgpack.pack(obj, f, ext_handlers=self._ext_dump())
 
     def dumps(self, obj):
         """ Dump object to bytes array. """
@@ -157,7 +157,7 @@ class UmsgpackCoder:
 
     def load(self, f):
         """ Load object from file stream. """
-        umsgpack.unpack(f, ext_handlers=self._ext_load())
+        return umsgpack.unpack(f, ext_handlers=self._ext_load())
 
     def loads(self, b):
         """ Load object from bytes array. """

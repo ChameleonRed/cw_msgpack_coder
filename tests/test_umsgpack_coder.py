@@ -1,4 +1,5 @@
 import unittest
+import io
 
 from cw_msgpack_coder.umsgpack_coder import UmsgpackCoder
 
@@ -20,6 +21,13 @@ class TestUmsgpackCoder(unittest.TestCase):
         o2 = coder.loads(s)
         self.assertEqual(o, o2)
 
+        stream = io.BytesIO()
+        coder.dump(o, stream)
+        stream.seek(0)
+        o2 = coder.load(stream)
+        self.assertEqual(o, o2)
+
+
     class DictClass:
         def __init__(self, a):
             self.a = a
@@ -38,6 +46,12 @@ class TestUmsgpackCoder(unittest.TestCase):
         o = self.DictClass(1)
         s = coder.dumps(o)
         o2 = coder.loads(s)
+        self.assertEqual(o, o2)
+
+        stream = io.BytesIO()
+        coder.dump(o, stream)
+        stream.seek(0)
+        o2 = coder.load(stream)
         self.assertEqual(o, o2)
 
     class SlotClass:
@@ -60,6 +74,12 @@ class TestUmsgpackCoder(unittest.TestCase):
         o2 = coder.loads(s)
         self.assertEqual(o, o2)
 
+        stream = io.BytesIO()
+        coder.dump(o, stream)
+        stream.seek(0)
+        o2 = coder.load(stream)
+        self.assertEqual(o, o2)
+
     class MultiSlotClass:
         __slots__ = 'a', 'b'
 
@@ -80,6 +100,12 @@ class TestUmsgpackCoder(unittest.TestCase):
         o = self.MultiSlotClass(1, 2)
         s = coder.dumps(o)
         o2 = coder.loads(s)
+        self.assertEqual(o, o2)
+
+        stream = io.BytesIO()
+        coder.dump(o, stream)
+        stream.seek(0)
+        o2 = coder.load(stream)
         self.assertEqual(o, o2)
 
     class FirstComponentClass:
@@ -126,6 +152,12 @@ class TestUmsgpackCoder(unittest.TestCase):
         o2 = coder.loads(s)
         self.assertEqual(o, o2)
 
+        stream = io.BytesIO()
+        coder.dump(o, stream)
+        stream.seek(0)
+        o2 = coder.load(stream)
+        self.assertEqual(o, o2)
+
     def test_encode_compound_of_compound_class(self):
         coder = UmsgpackCoder()
         coder.set_default_coder_for_class(self.CompoundClass)
@@ -136,5 +168,11 @@ class TestUmsgpackCoder(unittest.TestCase):
         o = self.CompoundClass(a, b)
         s = coder.dumps(o)
         o2 = coder.loads(s)
+        self.assertEqual(o, o2)
+
+        stream = io.BytesIO()
+        coder.dump(o, stream)
+        stream.seek(0)
+        o2 = coder.load(stream)
         self.assertEqual(o, o2)
 

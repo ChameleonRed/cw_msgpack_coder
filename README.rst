@@ -37,6 +37,9 @@ It is very simple:
     coder.set_default_coder_for_class(self.YourClass)
     coder.set_default_coder_for_class(self.YourNestedClass)
 
+    # register old modules names (required if you renamed some modules and want load old data)
+    coder.set_set_old_module_name_to_current('old_name', 'current_name')
+
     # now create some objects to test
     o = YourClass('hello world!', YourNestedClass())
 

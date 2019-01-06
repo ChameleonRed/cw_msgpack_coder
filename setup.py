@@ -9,7 +9,7 @@ def long_description():
 
 
 setup(name='cw_msgpack_coder',
-      version='1.1.5',
+      version='1.1.6',
       description='Simple and fast Python any object serialization with use msgpack.',
       long_description=long_description(),
       author='Cezary K. Wagner',

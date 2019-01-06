@@ -63,7 +63,11 @@ class UmsgpackCoder:
 
     def __init__(self):
         self.classes_coders = {}
-        """ umsgpack custom classes coders. """
+        """umsgpack custom classes coders."""
+        self.allowed_modules = set()
+        """Allowed modules names inherited from classes."""
+        self.old_module_name_to_current = {}
+        """Mapping of old modules names to current names. Required to load old data files."""
 
     def set_default_coder_for_class(self, cls):
         """
@@ -71,6 +75,13 @@ class UmsgpackCoder:
         For security you need register all classes.
         """
         self.classes_coders[cls] = UmsgpackClassDefaultCoder
+        self.allowed_modules.add(cls.__module__)
+
+    def set_old_module_name_to_current(self, old_module_name, current_module_name):
+        """
+        For loading old data files you need map old modules name to new.
+        """
+        self.old_module_name_to_current[old_module_name] = current_module_name
 
     # metadata identifiers
     MODULE_NAME = 0
@@ -124,6 +135,17 @@ class UmsgpackCoder:
         module = sys.modules.get(module_name)
         # load module if not loaded
         if module is None:
+            current_module_name = self.old_module_name_to_current.get(module_name)
+            # name is odl update module name
+            if current_module_name is not None:
+                module_name = current_module_name
+
+            # check if module is allowed
+            if module_name not in self.allowed_modules:
+                raise RuntimeError((f'{module_name} is not allowed or module name is old.'
+                                    ' Set coder for class or set old module name to current.'
+                                    f' Allowed modules are {self.allowed_modules}.'
+                                    f' Mapped old module names to current are {self.old_module_name_to_current}.'))
             __import__(module_name)
             module = sys.modules[module_name]
 

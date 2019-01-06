@@ -136,7 +136,7 @@ class UmsgpackCoder:
         # load module if not loaded
         if module is None:
             current_module_name = self.old_module_name_to_current.get(module_name)
-            # name is odl update module name
+            # name is old update module name
             if current_module_name is not None:
                 module_name = current_module_name
 
